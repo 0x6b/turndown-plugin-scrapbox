@@ -1,0 +1,53 @@
+{
+  "name": "turndown-plugin-scrapbox",
+  "version": "0.1.0",
+  "description": "Turndown plugin to add Scrapbox extensions",
+  "keywords": [
+    "turndown",
+    "turndown-plugin",
+    "scrapbox"
+  ],
+  "homepage": "https://github.com/0x6b/turndown-plugin-scrapbox",
+  "bugs": "https://github.com/0x6b/turndown-plugin-scrapbox/issues",
+  "license": "MIT",
+  "author": "0x6b",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "main": "lib/turndown-plugin-scrapbox.cjs.js",
+  "module": "lib/turndown-plugin-scrapbox.es.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0x6b/turndown-plugin-scrapbox.git"
+  },
+  "scripts": {
+    "prebuild": "npm-run-all clean prettier",
+    "build": "npm-run-all build:*",
+    "build:es": "rollup src/scrapbox.js --format es --file lib/turndown-plugin-scrapbox.es.js",
+    "build:cjs": "rollup src/scrapbox.js --format cjs --file lib/turndown-plugin-scrapbox.cjs.js",
+    "build:dist": "rollup src/scrapbox.js --format umd --name turndownPluginScrapbox --file dist/turndown-plugin-scrapbox.js",
+    "pretest": "npm run build",
+    "test": "node test/index.js",
+    "prepublish": "npm run test",
+    "prettier": "prettier --write \"{src,test}/*.js\"",
+    "clean": "rimraf \"{dist,lib}/*.js\""
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.4.2",
+    "turndown": "^4.0.2"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.7.3"
+  },
+  "prettier": {
+    "printWidth": 120
+  }
+}
